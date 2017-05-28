@@ -32,25 +32,53 @@ class Users extends CI_Controller {
 		$name = $_POST['name'];
 		$email = $_POST['email'];
 		$password = $_POST['password'];
-		//creo usuario
+		$data = $this->User_model->create($name, $email, $password);
+		if($data){
+			$response = [
+				"data" => $data
+			];
+		}else{
+			$response = [
+				"error" => "Something goes wrong"
+			];
+		}
+		echo json_encode($response);exit;		
 	}
 
 	//Update
 	public function put($id){
 		if(!$id){
-			//retorno error
+			echo json_encode(["error" => "Id missing"]);exit;
 		}
 		$name = $_POST['name'];
-		$email = $_POST['email'];
-		$password = $_POST['password'];
-		//Actualizo usuario
+		$data = $this->User_model->update($id, $name);
+		if($data){
+			$response = [
+				"data" => $data
+			];
+		}else{
+			$response = [
+				"error" => "Something goes wrong"
+			];
+		}
+		echo json_encode($response);exit;
 	}
 
 	//Delete
 	public function delete($id){
 		if(!$id){
-			//retorno error
+			echo json_encode(["error" => "Id missing"]);exit;
 		}
-		//Borro usuario
+		$data = $this->User_model->delete($id);
+		if($data){
+			$response = [
+				"data" => $data
+			];
+		}else{
+			$response = [
+				"error" => "Something goes wrong"
+			];
+		}
+		echo json_encode($response);exit;
 	}
 }

@@ -24,7 +24,7 @@ class User_model extends CI_Model {
         return $this->db->where('id', $id)->update('user', $data);
     }
 
-    public function delete($id, $name)
+    public function delete($id)
     {
         if(!$id){
             return false;
